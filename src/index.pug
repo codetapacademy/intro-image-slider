@@ -19,19 +19,36 @@ html
                 display: flex;
                 flex-wrap: nowrap;
                 position: absolute;
-                //- transition: 0.15s;
+                transition: 0.15s;
+                left: 0;
             }
             .image {
                 height: 100vh;
                 width: 100vw;
+                background-size: cover;
+                background-position: center center;
             }
             //- html, body {
             //-     height: 100%;
             //- }
     body
+        -
+            const imageList = [
+                "01-responsive-web-design.jpg",
+                "02-mobile-first-design.jpg",
+                "03-fluid-typography.jpg",
+                "04-single-page-vs-multi-page.jpg",
+                "05-seo.jpg",
+                "06-perfect-score.jpg",
+                "07-code-editor.jpg",
+                "08-precompilers-sass.jpg",
+                "09-pug-language.jpg",
+                "10-team-collaboration.jpg",
+                "11-development-vs-client.jpg",
+            ]
         .image-list
-            each image in ['red', 'green', 'blue', 'orange']
-                .image(style=`background-color:${image}`)
+            each image in imageList
+                .image(style=`background-image: url(/asset/image/${image})`)
         script.
             const imageElementList = [...document.querySelectorAll('.image')];
             const imageList = document.querySelector('.image-list');
