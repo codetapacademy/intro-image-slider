@@ -2,5 +2,54 @@ doctype html
 html
     head
         title Hi Ovi, Razvan and Istvan are awesome coders
+        meta(
+            name="viewport" 
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        )
+
+        style.
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                overflow: hidden;
+            }
+            .image-list {
+                display: flex;
+                flex-wrap: nowrap;
+                position: absolute;
+            }
+            .image {
+                height: 100vh;
+                width: 100vw;
+            }
+            //- html, body {
+            //-     height: 100%;
+            //- }
     body
-        h1 Cool!
+        .image-list
+            each image in ['red', 'green', 'blue', 'orange']
+                .image(style=`background-color:${image}`)
+        script.
+            const imageElementList = [...document.querySelectorAll('.image')];
+            imageElementList.map(imageElement => {
+                const imageElementDimensions = imageElement.getBoundingClientRect();
+                const windowWidth = window.screen.width;
+                let start = 0,
+                    end = 0;
+                imageElement.addEventListener('touchstart', e => {
+                    start = e.touches[0].clientX;
+                    console.log(start)
+                })
+                imageElement.addEventListener('touchend', e => {
+                    end = e.changedTouches[0].clientX;
+                    console.log(end)
+                    const direction = start - end;
+                    if (direction > 0) {
+                        console.log('left')
+                    } else {
+                        console.log('right')
+                    }
+                })
+            })
