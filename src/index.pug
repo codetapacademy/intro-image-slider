@@ -19,6 +19,7 @@ html
                 display: flex;
                 flex-wrap: nowrap;
                 position: absolute;
+                //- transition: 0.15s;
             }
             .image {
                 height: 100vh;
@@ -33,8 +34,8 @@ html
                 .image(style=`background-color:${image}`)
         script.
             const imageElementList = [...document.querySelectorAll('.image')];
+            const imageList = document.querySelector('.image-list');
             imageElementList.map(imageElement => {
-                const imageElementDimensions = imageElement.getBoundingClientRect();
                 const windowWidth = window.screen.width;
                 let start = 0,
                     end = 0;
@@ -43,13 +44,17 @@ html
                     console.log(start)
                 })
                 imageElement.addEventListener('touchend', e => {
+                    const imageElementDimensions = imageElement.getBoundingClientRect();
                     end = e.changedTouches[0].clientX;
                     console.log(end)
                     const direction = start - end;
+                    const imageListLeft = parseInt(imageList.style.left, 10) || 0;
                     if (direction > 0) {
-                        console.log('left')
+                        console.log(imageListLeft)
+                        // decrease the left style property
+                        imageList.style.left = (imageListLeft + imageElementDimensions.left - windowWidth) + 'px';
                     } else {
-                        console.log('right')
+                        imageList.style.left = (imageListLeft + imageElementDimensions.left + windowWidth) + 'px';
                     }
                 })
             })
